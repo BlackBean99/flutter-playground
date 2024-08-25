@@ -1,151 +1,71 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
+import 'package:toonflix/models/webtoon_model.dart';
+import 'package:toonflix/screen/webtoon_widget.dart';
+import 'package:toonflix/services/api_service.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class HomeScreen extends StatelessWidget {
+  HomeScreen({super.key});
 
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  static const twentyFiveMinutes = 1500;
-  int totalSeconds = twentyFiveMinutes;
-  bool isRunning = false;
-  int totalPomodoros = 0;
-  late Timer timer; //late는 당장 property를 초기화하지 않는다.
-
-  void onTick(Timer timer) {
-    if (totalSeconds == 0) {
-      setState(() {
-        totalPomodoros++;
-        isRunning = false;
-        totalSeconds = twentyFiveMinutes;
-      });
-      timer.cancel();
-    } else {
-      setState(() {
-        totalSeconds--;
-      });
-    }
-  }
-
-  void onStartPressed() {
-    //타이머는 Dart 표준 라이브러리에 포함되어 있다.
-    timer = Timer.periodic(
-      const Duration(seconds: 1),
-      onTick,
-    ); //periodic은 주기적으로 함수를 실행한다.
-    //함수에 괄호는 넣지 않는다. 그것은 함수를 지금 실행하는것을 의미한다(?)
-    //함수는 timer 스스로를 인자로 가지고 간다.
-
-    setState(() {
-      isRunning = true;
-    });
-  }
-
-  void onPausePressed() {
-    timer.cancel();
-
-    setState(() {
-      isRunning = false;
-    });
-  }
-
-  String format(int seconds) {
-    var duration = Duration(
-      seconds: seconds,
-    );
-    // print(duration); //길게 알려줌 (0:21:21.000000)
-    // print(duration.inMinutes); //소수점도 없고 그냥 대충 몇분인지 알려주는듯
-    // print(duration.inSeconds); //1308 처럼 값이 나옴
-    // print(duration.toString().split('.').first);
-    // print(duration.toString().split('.').first.split(':'));        //I/flutter ( 3146): [0, 19, 28]
-    // print(duration.toString().split('.').first.substring(2, 7));   //I/flutter ( 3146): 19:22
-    return duration.toString().split('.').first.substring(2, 7);
-  }
+  final Future<List<WebtoonModel>> webtoons = ApiService.getTodayToons();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surface,
-      body: Column(
-        children: [
-          Flexible(
-            flex: 1,
-            child: Container(
-              alignment: Alignment.bottomCenter,
-              child: Text(
-                format(totalSeconds),
-                style: TextStyle(
-                  color: Theme.of(context).cardColor,
-                  fontSize: 89,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        elevation: 2, //음영(높낮이차)
+        foregroundColor: Colors.green,
+        backgroundColor: Colors.white,
+        centerTitle: true,
+        title: const Text(
+          "오늘의 웹툰",
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.w500,
           ),
-          Flexible(
-            flex: 2,
-            child: Center(
-              child: IconButton(
-                iconSize: 120,
-                color: Theme.of(context).cardColor,
-                onPressed: isRunning ? onPausePressed : onStartPressed,
-                icon: isRunning
-                    ? const Icon(Icons.pause_circle_outline_outlined)
-                    : const Icon(Icons.play_circle_outline),
-              ),
-            ),
-          ),
-          Flexible(
-            flex: 1,
-            child: Row(
+        ),
+      ),
+      body: FutureBuilder(
+        future: webtoons,
+        builder: (context, snapshot) {
+          //snapshot으로 Future의 상태를 알 수 있다.
+          if (snapshot.hasData) {
+            return Column(
               children: [
+                const SizedBox(
+                  height: 50,
+                ),
                 Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Theme.of(context).cardColor,
-
-                        //border Radius 방법
-                        // borderRadius: BorderRadius.circular(50),
-                        // borderRadius: const BorderRadius.only(
-                        //   topLeft: Radius.circular(50),
-                        //   topRight: Radius.circular(50),
-                        // ),
-                        borderRadius: const BorderRadius.vertical(
-                          top: Radius.circular(40),
-                        )),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Pomodors',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600,
-                            color:
-                                Theme.of(context).textTheme.displayLarge!.color,
-                          ),
-                        ),
-                        Text(
-                          '$totalPomodoros',
-                          style: TextStyle(
-                            fontSize: 58,
-                            fontWeight: FontWeight.w600,
-                            color:
-                                Theme.of(context).textTheme.displayLarge!.color,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  child: makeList(snapshot),
                 ),
               ],
-            ),
-          ),
-        ],
+            );
+          }
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        },
+      ),
+    );
+  }
+
+  ListView makeList(AsyncSnapshot<List<WebtoonModel>> snapshot) {
+    return ListView.separated(
+      scrollDirection: Axis.horizontal,
+      itemCount: snapshot.data!.length,
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+      itemBuilder: (context, index) {
+        print(index);
+        var webtoon = snapshot.data![index];
+
+        return Webtoon(
+          title: webtoon.title,
+          thumb: webtoon.thumb,
+          id: webtoon.id,
+        );
+      },
+      separatorBuilder: (context, index) => const SizedBox(
+        width: 20,
       ),
     );
   }
