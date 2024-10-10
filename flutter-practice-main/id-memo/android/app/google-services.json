@@ -1,6 +1,6 @@
 {
   "project_info": {
-    "project_number": "810502874638",
+    "project_number": "",
     "firebase_url": "https://flutter---id-memo.firebaseio.com",
     "project_id": "flutter---id-memo",
     "storage_bucket": "flutter---id-memo.appspot.com"
@@ -8,27 +8,27 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:810502874638:android:6f5e45009975f9c19d3e5f",
+        "mobilesdk_app_id": "",
         "android_client_info": {
-          "package_name": "com.choiyoobin.flutteridmemo"
+          "package_name": ""
         }
       },
       "oauth_client": [
         {
-          "client_id": "810502874638-9sjcgged1g7blqj15o2uj5e2uuqevk8n.apps.googleusercontent.com",
+          "client_id": "",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCJI_c5GLTye3WrkfugnGjJ4b-bIOe9u7s"
+          "current_key": ""
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "810502874638-9sjcgged1g7blqj15o2uj5e2uuqevk8n.apps.googleusercontent.com",
+              "client_id": "",
               "client_type": 3
             }
           ]
