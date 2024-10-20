@@ -27,18 +27,50 @@ environment:
 # dependencies can be manually updated by changing the version numbers below to
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
+
 dependencies:
   flutter:
     sdk: flutter
-
+  cupertino_icons: ^1.0.6
+  dio: ^5.7.0
+  get: ^4.6.6
+  flutter_dotenv: ^5.1.0
+  location: ^6.0.1
+  permission_handler: ^11.3.1
+  google_maps_flutter: ^2.6.1
+  flutter_config: ^2.0.2
+  health: ^10.2.0
+  fl_chart: ^0.68.0
+  dropdown_button2: ^2.3.9
+  pedometer: ^4.0.1
+  get_storage: ^2.1.1
+  flutter_foreground_task: ^6.5.0
+  kakao_flutter_sdk: ^1.9.3
+  flutter_secure_storage: ^9.2.2
+  image_picker: ^1.1.2
+  intl: ^0.19.0
+  sign_in_with_apple: ^6.1.1
+  animated_toggle_switch: ^0.8.2
+  provider: ^6.1.2
+  url_launcher: ^6.3.0
+  flutter_native_splash: ^2.4.1
+  flutter_launcher_icons: ^0.13.1
+  smooth_page_indicator: ^1.2.0+3
+  internet_connection_checker_plus: ^2.5.1
+  in_app_review: ^2.0.9
+  wakelock_plus: ^1.2.7
+  firebase_core: ^3.3.0
+  firebase_analytics: ^11.2.1
+  firebase_messaging: ^15.0.4
+  package_info_plus: ^8.0.2
+  optimize_battery: ^0.0.4
+  cached_network_image: ^3.4.0
+  flutter_svg: ^2.0.10+1
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.6
 
-dev_dependencies:
-  flutter_test:
-    sdk: flutter
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
