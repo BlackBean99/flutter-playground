@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hang_dev_app/controllers/main-controller.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});

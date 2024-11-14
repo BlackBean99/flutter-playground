@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meet_free_app/constants/color-style.dart';
 
 void main() {
   runApp(const MyApp());
@@ -111,6 +112,12 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
+            ),
+            // Input Button
+            const TextField(
+              decoration: kTextFieldDecoration,
+              // size  328, 56
+              
             ),
           ],
         ),

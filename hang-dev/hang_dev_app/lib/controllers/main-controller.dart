@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:hang_dev_app/services/ios_walking_service.dart';
 import 'package:optimize_battery/optimize_battery.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -9,18 +10,19 @@ import 'package:hang_dev_app/services/my_place_service.dart';
 
 class MainController extends GetxController {
   // final FcmService fcmService = FcmService();
+  // final AnnouncementService announcementService = AnnouncementService();
   final MyPlaceService myPlaceService = MyPlaceService();
   final storage = GetStorage();
 
   final RxBool internetCheck = true.obs;
   final RxBool isAlertIsShow = false.obs;
+  final String popupKey = "hidePopupUntil";
 
   @override
   void onInit() async {
     super.onInit();
-    fcmService.registerFcmToken();
+    // fcmService.registerFcmToken();
     myPlaceService.getMyPlaceInfo();
-    await AndroidWalkingService().postAllUserStepFromStorage();
     checkNewFeature();
     await checkLocationPermission();
     await checkBatteryPermission();
@@ -43,10 +45,6 @@ class MainController extends GetxController {
     if (batteryPermissionGranted == false) {
       _showRequestBattery();
     }
-  }
-
-  void checkNewFeature() {
-    bool? isChecked = storage.read('group_feature_checked');
   }
 
   void _showRequestLocationAlways() {
