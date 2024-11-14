@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:hang_dev_app/services/ios_walking_service.dart';
+import 'package:hang_dev_app/utils/secure_storage.dart';
 import 'package:optimize_battery/optimize_battery.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -23,9 +24,9 @@ class MainController extends GetxController {
     super.onInit();
     // fcmService.registerFcmToken();
     myPlaceService.getMyPlaceInfo();
-    checkNewFeature();
     await checkLocationPermission();
     await checkBatteryPermission();
+    loadEvent();
   }
 
   Future<bool> checkLocationPermission() async {
@@ -44,6 +45,21 @@ class MainController extends GetxController {
         await OptimizeBattery.isIgnoringBatteryOptimizations();
     if (batteryPermissionGranted == false) {
       _showRequestBattery();
+    }
+  }
+
+  loadEvent() async {
+    final popupData = await SecureStorage().secureStorage.read(key: popupKey);
+    if (popupData == null ||
+        popupData != DateTime.now().toString().split(" ")[0]) {
+      List<Event> events = await announcementService.getEvents();
+
+      if (events.isEmpty) {
+        return;
+      }
+      Get.buttomSheet(
+
+      )
     }
   }
 
