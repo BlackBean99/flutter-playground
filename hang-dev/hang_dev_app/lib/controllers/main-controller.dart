@@ -3,14 +3,11 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:hang_dev_app/constants/app-colors.dart';
 import 'package:hang_dev_app/constants/text-styles.dart';
-import 'package:hang_dev_app/models/event.dart';
-import 'package:hang_dev_app/services/ios_walking_service.dart';
 import 'package:hang_dev_app/utils/secure_storage.dart';
 import 'package:hang_dev_app/widgets/common/pop_up_event.dart';
 import 'package:optimize_battery/optimize_battery.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:hang_dev_app/services/my_place_service.dart';
 
 class MainController extends GetxController {

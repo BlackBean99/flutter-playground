@@ -14,9 +14,9 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     Get.put(MainController());
     Get.put(MyPageController());
-    Get.put(RankingController());
-    Get.put(BottomSheetController());
-    Get.put(MapController());
+    // Get.put(RankingController());
+    // Get.put(BottomSheetController());
+    // Get.put(MapController());
     final NavigationController navigationController =
         Get.put(NavigationController());
 
