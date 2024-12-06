@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:hang_dev_app/constants/app-colors.dart';
+import 'package:hang_dev_app/constants/text-styles.dart';
+import 'package:hang_dev_app/models/event.dart';
 import 'package:hang_dev_app/services/ios_walking_service.dart';
 import 'package:hang_dev_app/utils/secure_storage.dart';
+import 'package:hang_dev_app/widgets/common/pop_up_event.dart';
 import 'package:optimize_battery/optimize_battery.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -52,21 +56,23 @@ class MainController extends GetxController {
     final popupData = await SecureStorage().secureStorage.read(key: popupKey);
     if (popupData == null ||
         popupData != DateTime.now().toString().split(" ")[0]) {
-      List<Event> events = await announcementService.getEvents();
+      var events;
+      // List<Event> events = await announcementService.getEvents();
 
-      if (events.isEmpty) {
-        return;
-      }
-      Get.buttomSheet(
-
-      )
+      // if (events.isEmpty) {
+      //   return;
+      // }
+      Get.bottomSheet(
+        EventPopUp(events: events),
+        backgroundColor: AppColors.backgroundSecondary,
+      );
     }
   }
 
   void _showRequestLocationAlways() {
     Get.dialog(
       AlertDialog(
-        title: Text(
+        title: const Text(
           '위치 권한을 "항상 허용"으로 바꿔주세요!',
           style: TextStyle(
             color: AppColors.textPrimary,
@@ -110,7 +116,7 @@ class MainController extends GetxController {
   void _showRequestBattery() {
     Get.dialog(
       AlertDialog(
-        title: Text(
+        title: const Text(
           '배터리 최적화를 해제 해주세요!',
           style: TextStyle(
             color: AppColors.textPrimary,
@@ -154,7 +160,7 @@ class MainController extends GetxController {
   void _showNewFeature() {
     Get.dialog(
       AlertDialog(
-        title: Text(
+        title: const Text(
           '그룹 기능 출시!',
           style: TextStyle(
             color: AppColors.textPrimary,

@@ -4,6 +4,7 @@ import 'dart:isolate';
 import 'package:flutter_foreground_task/flutter_foreground_task.dart';
 import 'package:hang_dev_app/services/android_walking_service.dart';
 import 'package:hang_dev_app/utils/secure_storage.dart';
+import 'package:pedometer/pedometer.dart';
 
 Future<void> initForegroundTask() async {
   if (!await FlutterForegroundTask.isRunningService) {
@@ -53,11 +54,10 @@ class AndroidWalkingHandler extends TaskHandler {
   final AndroidWalkingService walkingService = AndroidWalkingService();
 
   static String todayStepKey = 'currentSteps';
-  static String lastSavedStepKey = 'lastSteps'
-  
+  static String lastSavedStepKey = 'lastSteps';
+
   static int currentSteps = 0;
 
-  
   @override
   void onDestroy(DateTime timestamp, SendPort? sendPort) {}
 

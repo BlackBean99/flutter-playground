@@ -6,9 +6,9 @@ class EventImage extends StatelessWidget {
   final String imageUrl;
   final int? announcementId;
   final int eventId;
-  final AnnouncementService announcementService = AnnouncementService();
+  // final AnnouncementService announcementService = AnnouncementService();
 
-  EventImage({
+  const EventImage({
     super.key,
     required this.imageUrl,
     required this.announcementId,
@@ -20,16 +20,16 @@ class EventImage extends StatelessWidget {
     return GestureDetector(
       onTap: () async {
         if (announcementId != null) {
-          announcementService.increaseEventViewCount(eventId);
-          AnnouncementInfo announcement =
-              await announcementService.getAnnouncementContent(announcementId!);
-          Get.to(
-            AnnouncementScreen(
-              title: announcement.title,
-              date: announcement.date,
-              content: announcement.content,
-            ),
-          );
+          // announcementService.increaseEventViewCount(eventId);
+          // AnnouncementInfo announcement =
+          // await announcementService.getAnnouncementContent(announcementId!);
+          // Get.to(
+          //   AnnouncementScreen(
+          //     title: announcement.title,
+          //     date: announcement.date,
+          //     content: announcement.content,
+          //   ),
+          // );
         }
       },
       child: Image(
