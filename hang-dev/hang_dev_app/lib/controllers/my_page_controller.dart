@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:hang_dev_app/models/user_achievements.dart';
+import '../services/pixel_service.dart';
 import '../models/achievement_element.dart';
 import '../services/achievement_service.dart';
 import '../services/user_service.dart';

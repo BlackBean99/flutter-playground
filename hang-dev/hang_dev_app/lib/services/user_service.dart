@@ -77,12 +77,8 @@ class UserService {
         )));
     if (profileImagePath != null) {
       fileName = profileImagePath.split('/').last;
-      formData.files.add(
-        MapEntry(
-          'profileImage',
-          await MultipartFile.fromFile(profileImagePath,filename: fileName);
-        )
-      );
+      formData.files.add(MapEntry('profileImage',
+          await MultipartFile.fromFile(profileImagePath, filename: fileName)));
     }
     var response = await dio.put(
       '/users/$userId',

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hang_dev_app/constants/app-colors.dart';
 import 'package:hang_dev_app/controllers/main-controller.dart';
+import 'package:hang_dev_app/controllers/my_page_controller.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
